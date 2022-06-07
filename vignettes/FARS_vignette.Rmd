@@ -1,0 +1,101 @@
+---
+title: "FARS_vignette"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{FARS_vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+```{r, echo=FALSE}
+knitr::opts_chunk$set(error = TRUE)
+```
+
+According to the Center for Disease Control (CDC), accidents
+are the fourth leading cause of death in the United States. For this
+reason traffic accidents are a worthy topic of study, and can be 
+examined by US state using this package fars_functions as follows:
+
+* Create comprehensive tables for a given year of accidents using fars_summarize_years
+* Create map plot representations of a year's accidents for a specific state with fars_map_state
+
+To obtain traffic fatality data in the United States for a given year since 1975 please visit the Fatality Analysis Reporting System (FARS) of the National Highway Safety Traffic Administration NHSTA website: 
+
+[https://www.nhtsa.gov/file-downloads?p=nhtsa/downloads/FARS/]
+
+From this FTP site you may download the data for any year in CSV format and the files are generally less than 50 MB.
+
+This document introduces you to fars_functions basic user tools, which are the summary functions in the bullet points above. Additionally, this document will also cover the helper functions that are part of the fars package. These helper functions are called by the two main summary functions and are generally not of stand-alone utility to the user.
+
+### fars_summarize_years
+
+To produce a summary table of the total number of accidents occurring in the 12 months of a given year, supply a vector with a single year to fars_summarize_years as follows:
+
+```{r echo=TRUE}
+fars_summarize_years("2013")
+```
+
+### fars_summarize_years applied to multiple years
+
+If you are interested in summarizing fatality data across multiple years then you may supply fars_summarize_years with a vector of several years of interest as shown in the example below:
+
+```{r echo=TRUE}
+years_vector <- c("1983","1993","2013")
+fars_summarize_years(years_vector)
+```
+
+### fars_map_state
+
+The fars package produces visual representations of where the accidents took place for a specific state and year, both of which are supplied by the user when fars_map_state is called. Here is an example for the state of Alabama:
+
+```{r echo=TRUE}
+fars_map_state(1,"2013")
+```
+
+and also for the state of California:
+
+```{r echo=TRUE}
+fars_map_state(6,"2013")
+```
+
+The state number the user supplies corresponds to the state's position in an alphabetical list of all fifty states.
+
+### Helper functions in fars_functions
+
+As a final note for developers the three helper functions below each play roles in the code for the two main user functions discussed above. These helper functions are:
+
+* fars_read
+* make_filename
+* fars_read_years
+
+Descriptions of the helper functions, where they are called, and example uses follow:
+
+### fars_read
+fars_read reads a file with FARS (Fatality Analysis Reporting System) data and creates an exception if the file does not exist, otherwise it changes the file contents from a csv to a tibble and returns that tibble. It is called by fars_read_years and fars_map_state. 
+```{r echo=TRUE}
+fars_read("accident_2013.csv")
+```
+
+### make_filename
+make_filename returns a character vector containing a formatted combination of text and variables from an inputted year. The corresponding file must be available in the working directory as this helper function does not check if it is present. make_filename is called repeatedly by fars_read_years and once in fars_map_state.
+
+```{r echo=TRUE}
+make_filename("1983")
+```
+
+### fars_read_years
+The final helper function in this package is fars_read_years, which is a way to apply make_filename to a list of multiple years. fars_read_years accepts one or more years as an inputted vector of years, and then calls make_filename() on each of those years. Finally it fills those newly made files with data from the associated year in the main data set. This is the key subroutine that underpins fars_summarize_years.
+
+```{r echo=TRUE}
+fars_read_years(c("1983","1993","2013"))
+```
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(FARS)
+```

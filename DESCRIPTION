@@ -1,0 +1,20 @@
+Package: FARS
+Title: Fatality Accident Reporting System Summary and Mapping Package
+Version: 0.0.0.9000
+Authors@R: 
+    person("Adrian", "Accurso", role = c("aut", "trl", "cre","student"),
+    comment = "R packages week 4 assignment", email = "adrian.accurso@gmail.com"))
+Maintainer: Adrian Accurso <adrian.accurso@gmail.com>
+Description: This package uses data from the National Highway Safety 
+  Administration to produce summary tables and graphs for different years
+  describing highway fatalities in the United States.
+License: `use_gpl3_license()`
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.0
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+VignetteBuilder: knitr
+Config/testthat/edition: 3
