@@ -1,6 +1,8 @@
 Package: FARS
 Title: Fatality Accident Reporting System Summary and Mapping Package
 Version: 0.0.0.9000
+Date: 2022-06-07
+Depends: R (>= 3.0.0), dplyr, readr, tidyr, maps, graphics
 Author: Adrian Accurso <adrian.accurso@gmail.com>
 Maintainer: Adrian Accurso <adrian.accurso@gmail.com>
 Description: This package uses data from the National Highway Safety 
