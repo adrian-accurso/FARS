@@ -2,7 +2,7 @@ Package: FARS
 Title: Fatality Accident Reporting System Summary and Mapping Package
 Version: 0.0.0.9000
 Authors@R: 
-    person("Adrian", "Accurso", role = c("aut", "trl", "cre","student"),
+    person("Adrian", "Accurso", role = c("aut", "trl", "cre"),
     comment = "R packages week 4 assignment", email = "adrian.accurso@gmail.com"))
 Maintainer: Adrian Accurso <adrian.accurso@gmail.com>
 Description: This package uses data from the National Highway Safety 
