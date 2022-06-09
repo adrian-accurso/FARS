@@ -40,13 +40,13 @@ For more information, see:
 To generate file name use: \code{\link{make_filename}}
 }
 \examples{
-library(dplyr)
+\dontrun{library(dplyr)
 library(readr)
 yr <- 2013
 data <- yr \%>\%
   make_filename \%>\%
   fars_read
-head(data)
+head(data)}
 }
 \seealso{
 \link{make_filename}

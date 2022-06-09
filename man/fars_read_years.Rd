@@ -17,7 +17,7 @@ A data.frame including entries in data by month, or NULL if the
 Ancillary function used by \code{fars_summarize_years}
 }
 \examples{
-fars_read_years(2013)
+\dontrun{fars_read_years(2013)}
 }
 \seealso{
 \link{fars_read}

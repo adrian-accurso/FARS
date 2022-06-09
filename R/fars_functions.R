@@ -30,13 +30,13 @@
 #'   file does not exists.
 #'
 #' @examples
-#' library(dplyr)
+#' \dontrun{library(dplyr)
 #' library(readr)
 #' yr <- 2013
 #' data <- yr %>%
 #'   make_filename %>%
 #'   fars_read
-#' head(data)
+#' head(data)}
 #' @note To generate file name use: \code{\link{make_filename}}
 #' @seealso \link{make_filename}
 #' @export
@@ -86,7 +86,7 @@ make_filename <- function(year) {
 #' @seealso \link{make_filename}
 #' @seealso \link{fars_summarize_years}
 #' @examples
-#' fars_read_years(2013)
+#' \dontrun{fars_read_years(2013)}
 #' @export
 
 fars_read_years <- function(years) {
@@ -118,8 +118,8 @@ fars_read_years <- function(years) {
 #' @importFrom dplyr n
 #' @seealso \link{fars_read_years}
 #' @examples
-#' plot(fars_summarize_years(2013))
-#' fars_summarize_years(c(2013, 1993))
+#' \dontrun{plot(fars_summarize_years(2013))}
+#' \dontrun{fars_summarize_years(c(2013, 1993))}
 #' @export
 
 fars_summarize_years <- function(years) {
