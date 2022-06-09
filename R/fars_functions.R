@@ -14,55 +14,38 @@
 #' fars_read: Read a file with FARS (Fatality Analysis Reporting System) data.
 #' Create exception if file does not exist, otherwise changes the file contents
 #' from a csv to a tibble
-
-#' @details For more information, see:
-#' \itemize{
-#'   \item{\url{https://www.nhtsa.gov/research-data/fatality-analysis-reporting-system-fars}}
-#'   \item{\url{https://en.wikipedia.org/wiki/Fatality_Analysis_Reporting_System}}
-#' }
+#'
+#' @param filename A character string representing a file name
+#' @return A tibble with fars data from the file named 'filename', or an error
+#' if the filepath is incorrect or if the file is not in csv format.
+#'
 #' @importFrom readr read_csv
-#' @importFrom dplyr tbl_df
-#'
-#' @param filename A character string with the name of the file to read, see
-#'   notes.
-#'
-#' @return A data frame with data readed from the csv file, or an error if the
-#'   file does not exists.
+#' @importFrom tidyr as_tibble
 #'
 #' @examples
-#' \dontrun{library(dplyr)
-#' library(readr)
-#' yr <- 2013
-#' data <- yr %>%
-#'   make_filename %>%
-#'   fars_read
-#' head(data)}
-#' @note To generate file name use: \code{\link{make_filename}}
-#' @seealso \link{make_filename}
+#' \dontrun{fars_read("accident_2013.csv.bz2")}
+#' \dontrun{x<-fars_read('farsFile.csv')}
 #' @export
+
 fars_read <- function(filename) {
   if(!file.exists(filename))
     stop("file '", filename, "' does not exist")
   data <- suppressMessages({
     readr::read_csv(filename, progress = FALSE)
   })
-  dplyr::tbl_df(data)
+  tidyr::as_tibble(data)
 }
 
-
-#' Create a data file name
+#' make_filename: Return a character vector containing a formatted combination
+#' of text and variables from an inputted year. The corresponding file must be
+#' available in the working directory as this helper function does not check if
+#' it is present.
 #'
-#' Make .csv data file name related to the given \code{year}
-#' The function does not check if the file is available.
-#'
-#' @param year A string or an integer with the input \code{year}
-#'
-#' @return This function returns a string with the data file name for a given
-#'   year, and the file path within the package.
-#'
+#' @param year A number or a string
+#' @return character vector of filename formatted as 'accident_year.csv'.
 #' @examples
 #' make_filename(2013)
-#' @seealso \link{fars_read}
+#' \dontrun{newFile <- make_filename('2021')}
 #' @export
 
 make_filename <- function(year) {
@@ -70,23 +53,19 @@ make_filename <- function(year) {
   sprintf("accident_%d.csv", year)
 }
 
-#' Read farsdata years
+#' fars_read_years: Accepts one or more years as an inputted vector of years,
+#' and then calls make_filename() on each of those years. Finally it fills those
+#' newly made files with data from the associated year in the main data set.
 #'
-#' Ancillary function used by \code{fars_summarize_years}
-#' @param years A vector with a list of years
+#' @param years A numeric vector of years for which the FARS data is required
 #'
-#' @importFrom dplyr mutate_
-#' @importFrom dplyr select_
-#' @importFrom magrittr "%>%"
-#
-#' @return A data.frame including entries in data by month, or NULL if the
-#'  \code{year} is not valid
+#' @importFrom dplyr mutate
+#' @importFrom dplyr select
+#' @importFrom magrittr %>%
 #'
-#' @seealso \link{fars_read}
-#' @seealso \link{make_filename}
-#' @seealso \link{fars_summarize_years}
-#' @examples
-#' \dontrun{fars_read_years(2013)}
+#' @return a data.frame including month and year entries, or NULL if the
+#' supplied year is not valid.
+#' @note this function will return NULL if the input is not a valid year.
 #' @export
 
 fars_read_years <- function(years) {
@@ -103,23 +82,23 @@ fars_read_years <- function(years) {
   })
 }
 
-
-#' Summarize farsdata by years
+#' fars_summarize_years: Returns a tibble of complete observations where
+#' the year is included as a column. Data from multiple years is expressed
+#' in one tibble with the fatalities summarized by month and year over the
+#' years supplied.
 #'
-#' This function summarizes yearly accidents data, by month
-#' @param years A vector with a list of years to summarize by.
-#'
-#' @return A data.frame with number of accidents by years summarized by month
+#' @param years A numeric vector of the years for the required FARS data.
+#' @return A tibble with the number of accidents each year summarized by month.
 #' @importFrom dplyr bind_rows
-#' @importFrom dplyr group_by_
-#' @importFrom dplyr summarize_
-#' @importFrom tidyr spread_
-#' @importFrom magrittr "%>%"
+#' @importFrom dplyr group_by
+#' @importFrom dplyr summarize
+#' @importFrom tidyr spread
+#' @importFrom magrittr %>%
 #' @importFrom dplyr n
-#' @seealso \link{fars_read_years}
+#'
 #' @examples
-#' \dontrun{plot(fars_summarize_years(2013))}
-#' \dontrun{fars_summarize_years(c(2013, 1993))}
+#' \dontrun{plot(fars_summarize_years(2014))}
+#' \dontrun{fars_summarize_years(yearsVector)}
 #' @export
 
 fars_summarize_years <- function(years) {
@@ -130,23 +109,24 @@ fars_summarize_years <- function(years) {
     tidyr::spread(year, n)
 }
 
-#' Create a map of accidents by state and year
+#' fars_map_state: Returns a map of the accidents in a state for a given year
+#' from an inputted state number and an inputted year.
+#' If state number does not exist it will return INVALID state number message.
 #'
-#' Displays a plot with a state map including the accidents location by year
-#' If the \code{state.num} is invalid the function shows an error
-#' @param state.num An Integer with the State Code
-#' @param year A string, or an integer, with the input \code{year}
+#' @param state.num A number corresponding to the alphabetical order of US state
+#' @param year A number, string or integer, for which FARS data is desired
+#'
+#' @return NULL
+#'
+#' @importFrom dplyr filter
 #' @importFrom maps map
-#' @importFrom dplyr filter_
 #' @importFrom graphics points
-#' @return None
-#' @seealso \link{fars_read}
-#' @seealso \link{make_filename}
-#' @examples
-#' \dontrun{
-#' fars_map_state(49, 2013)
-#' }
-#' @export
+
+#'@examples
+#'\dontrun{fars_map_state(1,2013)}
+#'\dontrun{fars_map_state(36,2013)}
+#'@export
+
 fars_map_state <- function(state.num, year) {
   filename <- make_filename(year)
   data <- fars_read(filename)

@@ -7,12 +7,11 @@
 fars_read(filename)
 }
 \arguments{
-\item{filename}{A character string with the name of the file to read, see
-notes.}
+\item{filename}{A character string representing a file name}
 }
 \value{
-A data frame with data readed from the csv file, or an error if the
-file does not exists.
+A tibble with fars data from the file named 'filename', or an error
+if the filepath is incorrect or if the file is not in csv format.
 }
 \description{
 The assignment will be graded based on how closely the documentation reflects
@@ -29,25 +28,7 @@ fars_read: Read a file with FARS (Fatality Analysis Reporting System) data.
 Create exception if file does not exist, otherwise changes the file contents
 from a csv to a tibble
 }
-\details{
-For more information, see:
-\itemize{
-\item{\url{https://www.nhtsa.gov/research-data/fatality-analysis-reporting-system-fars}}
-\item{\url{https://en.wikipedia.org/wiki/Fatality_Analysis_Reporting_System}}
-}
-}
-\note{
-To generate file name use: \code{\link{make_filename}}
-}
 \examples{
-\dontrun{library(dplyr)
-library(readr)
-yr <- 2013
-data <- yr \%>\%
-  make_filename \%>\%
-  fars_read
-head(data)}
-}
-\seealso{
-\link{make_filename}
+\dontrun{fars_read("accident_2013.csv.bz2")}
+\dontrun{x<-fars_read('farsFile.csv')}
 }

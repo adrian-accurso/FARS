@@ -2,29 +2,23 @@
 % Please edit documentation in R/fars_functions.R
 \name{fars_map_state}
 \alias{fars_map_state}
-\title{Create a map of accidents by state and year}
+\title{fars_map_state: Returns a map of the accidents in a state for a given year
+from an inputted state number and an inputted year.
+If state number does not exist it will return INVALID state number message.}
 \usage{
 fars_map_state(state.num, year)
 }
 \arguments{
-\item{state.num}{An Integer with the State Code}
+\item{state.num}{A number corresponding to the alphabetical order of US state}
 
-\item{year}{A string, or an integer, with the input \code{year}}
-}
-\value{
-None
+\item{year}{A number, string or integer, for which FARS data is desired}
 }
 \description{
-Displays a plot with a state map including the accidents location by year
-If the \code{state.num} is invalid the function shows an error
+fars_map_state: Returns a map of the accidents in a state for a given year
+from an inputted state number and an inputted year.
+If state number does not exist it will return INVALID state number message.
 }
 \examples{
-\dontrun{
-fars_map_state(49, 2013)
-}
-}
-\seealso{
-\link{fars_read}
-
-\link{make_filename}
+\dontrun{fars_map_state(1,2013)}
+\dontrun{fars_map_state(36,2013)}
 }
