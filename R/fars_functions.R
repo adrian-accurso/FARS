@@ -25,6 +25,7 @@
 #' @examples
 #' \dontrun{fars_read("accident_2013.csv.bz2")}
 #' \dontrun{x<-fars_read('farsFile.csv')}
+#' @export
 
 fars_read <- function(filename) {
   if(!file.exists(filename))
@@ -45,6 +46,7 @@ fars_read <- function(filename) {
 #' @examples
 #' make_filename(2013)
 #' \dontrun{newFile <- make_filename('2021')}
+#' @export
 
 make_filename <- function(year) {
   year <- as.integer(year)
@@ -64,6 +66,7 @@ make_filename <- function(year) {
 #' @return a data.frame including month and year entries, or NULL if the
 #' supplied year is not valid.
 #' @note this function will return NULL if the input is not a valid year.
+#' @export
 
 fars_read_years <- function(years) {
   lapply(years, function(year) {
@@ -96,6 +99,7 @@ fars_read_years <- function(years) {
 #' @examples
 #' \dontrun{plot(fars_summarize_years(2014))}
 #' \dontrun{fars_summarize_years(yearsVector)}
+#' @export
 
 fars_summarize_years <- function(years) {
   dat_list <- fars_read_years(years)
@@ -122,6 +126,7 @@ fars_summarize_years <- function(years) {
 #'@examples
 #'fars_map_state(1,2013)
 #'fars_map_state(36,2013)
+#'@export
 
 fars_map_state <- function(state.num, year) {
   filename <- make_filename(year)

@@ -22,6 +22,6 @@ in one tibble with the fatalities summarized by month and year over the
 years supplied.
 }
 \examples{
-\dontrun{plot(fars_summarize_years(2014)}
+\dontrun{plot(fars_summarize_years(2014))}
 \dontrun{fars_summarize_years(yearsVector)}
 }
