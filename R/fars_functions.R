@@ -32,7 +32,7 @@
 #' @examples
 #' library(dplyr)
 #' library(readr)
-#' yr <- 2015
+#' yr <- 2013
 #' data <- yr %>%
 #'   make_filename %>%
 #'   fars_read
@@ -118,8 +118,8 @@ fars_read_years <- function(years) {
 #' @importFrom dplyr n
 #' @seealso \link{fars_read_years}
 #' @examples
-#' plot(fars_summarize_years(2015))
-#' fars_summarize_years(c(2015, 2014))
+#' plot(fars_summarize_years(2013))
+#' fars_summarize_years(c(2013, 1993))
 #' @export
 
 fars_summarize_years <- function(years) {
@@ -144,7 +144,7 @@ fars_summarize_years <- function(years) {
 #' @seealso \link{make_filename}
 #' @examples
 #' \dontrun{
-#' fars_map_state(49, 2015)
+#' fars_map_state(49, 2013)
 #' }
 #' @export
 fars_map_state <- function(state.num, year) {

@@ -20,7 +20,7 @@ If the \code{state.num} is invalid the function shows an error
 }
 \examples{
 \dontrun{
-fars_map_state(49, 2015)
+fars_map_state(49, 2013)
 }
 }
 \seealso{

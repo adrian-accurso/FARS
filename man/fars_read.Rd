@@ -42,7 +42,7 @@ To generate file name use: \code{\link{make_filename}}
 \examples{
 library(dplyr)
 library(readr)
-yr <- 2015
+yr <- 2013
 data <- yr \%>\%
   make_filename \%>\%
   fars_read
