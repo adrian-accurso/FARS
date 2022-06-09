@@ -13,10 +13,6 @@ fars_map_state(state.num, year)
 
 \item{year}{A number, string or integer, for which FARS data is desired}
 }
-\value{
-map plot of the accidents for the given year of \code{state.num}
-and \code{year}
-}
 \description{
 fars_map_state: Returns a map of the accidents in a state for a given year
 from an inputted state number and an inputted year.

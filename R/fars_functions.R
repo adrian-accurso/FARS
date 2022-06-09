@@ -116,8 +116,7 @@ fars_summarize_years <- function(years) {
 #' @param state.num A number corresponding to the alphabetical order of US state
 #' @param year A number, string or integer, for which FARS data is desired
 #'
-#' @return map plot of the accidents for the given year of \code{state.num}
-#' and \code{year}
+#' @return NULL
 #'
 #' @importFrom dplyr filter
 #' @importFrom maps map
