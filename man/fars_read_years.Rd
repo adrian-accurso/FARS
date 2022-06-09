@@ -2,24 +2,27 @@
 % Please edit documentation in R/fars_functions.R
 \name{fars_read_years}
 \alias{fars_read_years}
-\title{fars_read_years: Accepts one or more years as an inputted vector of years,
-and then calls make_filename() on each of those years. Finally it fills those
-newly made files with data from the associated year in the main data set.}
+\title{Read farsdata years}
 \usage{
 fars_read_years(years)
 }
 \arguments{
-\item{years}{A numeric vector of years for which the FARS data is required}
+\item{years}{A vector with a list of years}
 }
 \value{
-a data.frame including month and year entries, or NULL if the
-supplied year is not valid.
+A data.frame including entries in data by month, or NULL if the
+\code{year} is not valid
 }
 \description{
-fars_read_years: Accepts one or more years as an inputted vector of years,
-and then calls make_filename() on each of those years. Finally it fills those
-newly made files with data from the associated year in the main data set.
+Ancillary function used by \code{fars_summarize_years}
 }
-\note{
-this function will return NULL if the input is not a valid year.
+\examples{
+fars_read_years(2013)
+}
+\seealso{
+\link{fars_read}
+
+\link{make_filename}
+
+\link{fars_summarize_years}
 }

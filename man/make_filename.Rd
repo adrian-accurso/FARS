@@ -2,26 +2,24 @@
 % Please edit documentation in R/fars_functions.R
 \name{make_filename}
 \alias{make_filename}
-\title{make_filename: Return a character vector containing a formatted combination
-of text and variables from an inputted year. The corresponding file must be
-available in the working directory as this helper function does not check if
-it is present.}
+\title{Create a data file name}
 \usage{
 make_filename(year)
 }
 \arguments{
-\item{year}{A number or a string}
+\item{year}{A string or an integer with the input \code{year}}
 }
 \value{
-character vector of filename formatted as 'accident_year.csv.bz2'.
+This function returns a string with the data file name for a given
+year, and the file path within the package.
 }
 \description{
-make_filename: Return a character vector containing a formatted combination
-of text and variables from an inputted year. The corresponding file must be
-available in the working directory as this helper function does not check if
-it is present.
+Make .csv data file name related to the given \code{year}
+The function does not check if the file is available.
 }
 \examples{
 make_filename(2013)
-\dontrun{newFile <- make_filename('2021')}
+}
+\seealso{
+\link{fars_read}
 }
