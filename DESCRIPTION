@@ -8,7 +8,7 @@ Maintainer: Adrian Accurso <adrian.accurso@gmail.com>
 Description: This package uses data from the National Highway Safety 
   Administration to produce summary tables and graphs for different years
   describing highway fatalities in the United States.
-License: `use_gpl3_license()`
+License: GPL (>= 2)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.0
